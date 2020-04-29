@@ -1,0 +1,46 @@
+User
+  id: integer [primary key]
+  name:string [present, 255 max chars]
+  username:string [present, 16 max chars]
+  email:string [present, 50 max char, validate with regex, unique(case_sensitive)]
+  has_secure_password
+    password:string [present, 6 to 20 chars]
+    add column password_digest to users table
+  created_at:datetime
+  updated_at:datetime
+
+  has_many :sent_invitations, foreign_key: 'invitor_id', class_name: 'Invitation'
+  has_many :received_invitations, foreign_key: 'invitee_id', class_name: 'Invitation'
+  has_many :owned_event, foreign_key: 'creator_id', class_name: 'Event'
+  has_many :attended_events, through: :invitations, source: :attendee
+
+
+Invitation
+  id:integer [primary key]
+  invitor_id:integer [present, foreign key]
+  invitee_id:integer [present, foreign key]
+  attendee_id:integer [foreign key, present]
+  title:string [present, 255 max chars]
+  body:text [present, 500 max characters]
+  accepted:boolean [present]
+  created_at:datetime
+  updated_at:datetime
+
+  belongs_to :invitor, class_name: 'User'
+  belongs_to :invitee, class_name: 'User'
+  belongs_to :attendee, class_name: 'Event' 
+
+
+Event
+  id:integer [primary key]
+  creator_id:integer [foreign_key, present]
+  title:string [present, 255 max chars]
+  description:text [present, 2000 max chars]
+  start_date:datetime [present]
+  end_date:datetime [present]
+  location:string [present, 255 max chars]
+  created_at:datetime
+  updated_at:datetime
+
+  belongs_to :creator, class_name: 'User'
+  has_many :attendees, foreign_key: 'attendee_id', class_name: 'Invitation'
