@@ -1,0 +1,12 @@
+<% provide(:title, @user.name) %>
+<div class="card card bg-light mb-3">
+  <h1 class="card-header">
+    <%= @user.name %>
+  </h1>
+  <div class="card-body">
+    <span class="font-weight-bold">Username</span>
+    <p class="card-text"><%= @user.username %></p>
+    <span class="font-weight-bold">Email</span>
+    <p class="card-text"><%= @user.email %></p>
+  </div>
+</div>
