@@ -11,7 +11,7 @@ User
 
   has_many :sent_invitations, foreign_key: 'invitor_id', class_name: 'Invitation'
   has_many :received_invitations, foreign_key: 'invitee_id', class_name: 'Invitation'
-  has_many :owned_event, foreign_key: 'creator_id', class_name: 'Event'
+  has_many :events, foreign_key: 'creator_id', class_name: 'Event'
   has_many :attended_events, through: :invitations, source: :attendee
 
 
@@ -34,7 +34,7 @@ Invitation
 Event
   id:integer [primary key]
   creator_id:integer [foreign_key, present]
-  title:string [present, 255 max chars]
+  title:string [present, 255 max chars, unique(case_sensitive)]
   description:text [present, 2000 max chars]
   start_date:datetime [present]
   end_date:datetime [present]

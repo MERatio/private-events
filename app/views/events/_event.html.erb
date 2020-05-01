@@ -1,0 +1,12 @@
+<li id="event-<%= event.id %>" class="col-sm-6">
+  <div class="card text-center">
+    <div class="card-body">
+      <h3 class="card-title"><%= event.title %></h3>
+      <p class="card-text"><%= event.description %>.</p>
+      <p class="card-text">Location: <%= event.location %></p>
+      <p class="card-text">Start date: <%= event.start_date.to_s(:rfc822) %></p>
+      <p class="card-text">End date: <%= event.end_date.to_s(:rfc822) %></p>
+      <%= link_to 'Show', event_path(event), class: 'btn btn-primary' %>
+    </div>
+  </div>
+</li>

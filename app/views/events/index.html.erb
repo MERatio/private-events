@@ -1,0 +1,9 @@
+<% provide(:title, 'All events') %>
+<h1 class="text-center">Welcome to Private Events</h1>
+
+<% if @events.any? %>
+  <ol class="events row">
+    <%= render @events %>
+  </ol>
+  <%= will_paginate @events, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+<% end %>

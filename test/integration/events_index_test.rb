@@ -1,17 +1,11 @@
 require 'test_helper'
 
-class UserShowTest < ActionDispatch::IntegrationTest
-  def setup
-    @user = users(:john)
-  end
-
-  test 'profile display' do
-    get user_path(@user)
-    assert_template 'users/show'
-    assert_select 'title', full_title(@user.name)
-    assert_select 'h1.d-inline', @user.name
-    assert_match @user.events.count.to_s, response.body
-    @user.events.paginate(page: 1).each do |event|
+class EventsIndexTest < ActionDispatch::IntegrationTest
+  test 'index' do
+    get events_path
+    assert_template 'events/index'
+    first_page_of_events = Event.paginate(page: 1)
+    first_page_of_events.each do |event| 
       assert_match event.title, response.body
       assert_match event.description, response.body
       assert_match event.location, response.body

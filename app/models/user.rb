@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :events, foreign_key: 'creator_id', class_name: 'Event'
   before_save :downcase_email
   attr_accessor :remember_token
   validates :name, presence: true, length: { maximum: 255 }

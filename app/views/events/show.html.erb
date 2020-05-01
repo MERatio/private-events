@@ -1,0 +1,20 @@
+<% provide(:title, 'Event') %>
+<div class="card card bg-light mb-3">
+  <h1 class="card-header">
+    <%= @event.title %>
+  </h1>
+  <div class="card-body">
+    <span class="font-weight-bold">Creator</span>
+    <p class="card-text"><%= @event.creator.name %></p>
+    <span class="font-weight-bold">Description</span>
+    <p class="card-text"><%= @event.description %></p>
+    <span class="font-weight-bold">Location</span>
+    <p class="card-text"><%= @event.location %></p>
+    <span class="font-weight-bold">Start Date</span>
+    <p class="card-text"><%= @event.start_date.to_s(:rfc822) %></p>
+    <span class="font-weight-bold">End Date</span>
+    <p class="card-text"><%= @event.end_date.to_s(:rfc822) %></p>
+  </div>
+</div>
+
+

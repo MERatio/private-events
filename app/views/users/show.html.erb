@@ -1,8 +1,9 @@
 <% provide(:title, @user.name) %>
 <div class="card card bg-light mb-3">
-  <h1 class="card-header">
-    <%= @user.name %>
-  </h1>
+  <div class="card-header">
+    <h1 class="d-inline"><%= @user.name %></h1>
+    <%= link_to 'Create event', new_event_path, class: 'btn btn-primary float-right btn-lg' %>
+  </div>
   <div class="card-body">
     <span class="font-weight-bold">Username</span>
     <p class="card-text"><%= @user.username %></p>
@@ -10,3 +11,11 @@
     <p class="card-text"><%= @user.email %></p>
   </div>
 </div>
+
+<h2 class="text-center"><%= @user.name %>'s owned events: <%= @user.events.count %></h2> 
+<% if @user.events.any? %>
+  <ol class="events row">
+    <%= render @events %>
+  </ol>
+  <%= will_paginate @events, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+<% end %>
