@@ -1,0 +1,12 @@
+<% provide(:title, 'Past events') %>
+<h1 class="text-center">
+  Past <%= pluralize(@past_events.count, 'event') %>
+</h1>
+
+<% if @past_events.any? %>
+  <ol class="attended-events row">
+    <%= render partial: 'events/event', collection: @past_events %>
+  </ol>
+  <%= will_paginate @past_events, 
+      renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+<% end %>

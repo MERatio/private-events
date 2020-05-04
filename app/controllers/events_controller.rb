@@ -21,7 +21,16 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find_by(id: params[:id])
+    @attendees = @event.attendees.paginate(page: params[:page])
   end    
+
+  def past_events
+    @past_events = Event.past.paginate(page: params[:page])
+  end
+
+  def upcoming_events
+    @upcoming_events = Event.upcoming.paginate(page: params[:page])
+  end
 
   private
 

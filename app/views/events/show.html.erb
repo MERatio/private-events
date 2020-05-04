@@ -1,8 +1,11 @@
 <% provide(:title, 'Event') %>
 <div class="card card bg-light mb-3">
-  <h1 class="card-header">
-    <%= @event.title %>
-  </h1>
+  <div class="card-header">
+    <h1 class="d-inline"><%= @event.title %></h1>
+    <% if (@event.upcoming? && logged_in?) %>
+      <%= link_to 'Invite user', "/events/#{@event.id}/invite", class: 'btn btn-primary float-right btn-lg' %>
+    <% end %>
+  </div>
   <div class="card-body">
     <span class="font-weight-bold">Creator</span>
     <p class="card-text"><%= @event.creator.name %></p>
@@ -17,4 +20,10 @@
   </div>
 </div>
 
-
+<h2 class="text-center"><%= pluralize(@attendees.count, 'Attendee') %></h2> 
+<% if @attendees.any? %>
+  <ol class="attendees row">
+    <%= render partial: 'users/user', collection: @attendees %>
+  </ol>
+  <%= will_paginate @attendees, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+<% end %>

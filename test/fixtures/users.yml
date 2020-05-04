@@ -1,7 +1,15 @@
 john:
+  id: 1
   name: 'John Doe'
   username: 'JohnDoe123'
   email: 'johndoe@example.com'
+  password_digest: <%= User.digest('foobar') %>
+
+jane:
+  id: 2
+  name: 'Jane Doe'
+  username: 'JaneDoe123'
+  email: 'janedoe@example.com'
   password_digest: <%= User.digest('foobar') %>
 
 <% 40.times do |n| %>

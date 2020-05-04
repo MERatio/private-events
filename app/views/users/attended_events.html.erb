@@ -1,0 +1,12 @@
+<% provide(:title, 'Attended events') %>
+<h1 class="text-center">
+  <%= @user.name %> attended 
+  <%= pluralize(@attended_events.count, 'event') %>
+</h1>
+
+<% if @attended_events.any? %>
+  <ol class="attended-events row">
+    <%= render partial: 'events/event', collection: @attended_events %>
+  </ol>
+  <%= will_paginate @attended_events, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+<% end %>

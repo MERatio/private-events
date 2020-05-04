@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :events, foreign_key: 'creator_id', class_name: 'Event'
+  has_many :invitations, foreign_key: 'attendee_id'
+  has_many :attended_events, through: :invitations, source: :event
   before_save :downcase_email
   attr_accessor :remember_token
   validates :name, presence: true, length: { maximum: 255 }
@@ -39,6 +41,16 @@ class User < ApplicationRecord
   # Delete the hash version of remember_token
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # Returns previous events
+  def previous_events
+    self.attended_events.past
+  end
+  
+  # Returns upcoming events
+  def upcoming_events
+    self.attended_events.upcoming
   end
 
   private

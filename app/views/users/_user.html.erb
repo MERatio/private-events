@@ -1,0 +1,10 @@
+<li id="event-<%= user.id %>" class="col-sm-6">
+  <div class="card text-center mb-4">
+    <div class="card-body">
+      <h3 class="card-title"><%= user.name %></h3>
+      <p class="card-text">Id: <%= user.id %>.</p>
+      <p class="card-text">Username: <%= user.username %>.</p>
+      <%= link_to 'Show', user_path(user), class: 'btn btn-primary' %>
+    </div>
+  </div>
+</li>

@@ -1,17 +1,18 @@
 birthday:
+  id: 1
   title: 'Birthday'
   description: 'Birthday of someone'
   location: 'House'
   start_date: <%= Faker::Date.between(from: 2.days.from_now, to: 30.days.from_now) %>
   end_date: <%= Faker::Date.between(from: 30.days.from_now, to: 60.days.from_now) %>
-  creator: john
+  creator_id: 1
 
 <% 50.times do |n| %>
 event_<%= n %>:
   title: <%= Faker::Lorem.sentence + n.to_s %>
   description: <%= Faker::Lorem.paragraph(sentence_count: 6) %>
-  location: <%= Faker::Address.full_address %>
+  location: <%= Faker::Address.full_address %> + n
   start_date: <%= Faker::Date.between(from: 2.days.from_now, to: 30.days.from_now) %>
   end_date: <%= Faker::Date.between(from: 30.days.from_now, to: 60.days.from_now) %>
-  creator: john
+  creator_id: 1
 <% end %>

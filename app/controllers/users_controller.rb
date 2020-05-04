@@ -22,6 +22,21 @@ class UsersController < ApplicationController
     @events = @user.events.paginate(page: params[:page])
   end
 
+  def attended_events
+    @user = User.find_by(id: params[:id])
+    @attended_events = @user.attended_events.paginate(page: params[:page])
+  end
+
+  def previous_events
+    @user = User.find_by(id: params[:id])
+    @previous_events = @user.previous_events.paginate(page: params[:page])
+  end
+
+  def upcoming_events
+    @user = User.find_by(id: params[:id])
+    @upcoming_events = @user.upcoming_events.paginate(page: params[:page])
+  end
+
   private
 
     def user_params

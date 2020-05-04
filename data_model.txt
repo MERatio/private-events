@@ -9,26 +9,17 @@ User
   created_at:datetime
   updated_at:datetime
 
-  has_many :sent_invitations, foreign_key: 'invitor_id', class_name: 'Invitation'
-  has_many :received_invitations, foreign_key: 'invitee_id', class_name: 'Invitation'
-  has_many :events, foreign_key: 'creator_id', class_name: 'Event'
-  has_many :attended_events, through: :invitations, source: :attendee
-
+  has_many :events,         foreign_key: 'creator_id', class_name: 'Event'
+  has_many :invitations,    foreign_key: 'attendee_id'
+  has_many :attended_events, through: :invitations, source: 'event'
 
 Invitation
   id:integer [primary key]
-  invitor_id:integer [present, foreign key]
-  invitee_id:integer [present, foreign key]
-  attendee_id:integer [foreign key, present]
-  title:string [present, 255 max chars]
-  body:text [present, 500 max characters]
-  accepted:boolean [present]
   created_at:datetime
   updated_at:datetime
 
-  belongs_to :invitor, class_name: 'User'
-  belongs_to :invitee, class_name: 'User'
-  belongs_to :attendee, class_name: 'Event' 
+  belongs_to :attendee, class_name: 'User'
+  belongs_to :event
 
 
 Event
@@ -42,5 +33,6 @@ Event
   created_at:datetime
   updated_at:datetime
 
-  belongs_to :creator, class_name: 'User'
-  has_many :attendees, foreign_key: 'attendee_id', class_name: 'Invitation'
+  belongs_to :creator,     class_name: 'User'
+  has_many   :invitations
+  has_many   :attendees,    through: :invitations

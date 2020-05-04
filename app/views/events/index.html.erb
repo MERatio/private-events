@@ -1,5 +1,5 @@
 <% provide(:title, 'All events') %>
-<h1 class="text-center">Welcome to Private Events</h1>
+<h1 class="text-center">All <%= pluralize(@events.count, 'event') %></h1>
 
 <% if @events.any? %>
   <ol class="events row">

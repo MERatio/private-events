@@ -2,22 +2,21 @@ body {
   padding-top: 4.5rem;
 }
 
-ul.navbar-links {
+ul.navbar-nav {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
-  li {
+  li.nav-item {
     display: inline-block;
-    a {
-      color: #fff;
-      text-decoration: none;
-    }
+    margin-right: 1rem;
+  }
+  li.nav-item > a {
+    color: #fff !important;
+    text-decoration: none;
   }
 }
 
-// Events
-
-.events {
+.events,
+.attendees,
+.attended-events {
   list-style-type: none;
   padding: 0;
 }

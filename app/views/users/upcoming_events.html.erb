@@ -1,0 +1,13 @@
+<% provide(:title, 'Upcoming events') %>
+<h1 class="text-center">
+  <%= @user.name %> upcoming
+  <%= pluralize(@upcoming_events.count, 'event') %>
+</h1>
+
+<% if @upcoming_events.any? %>
+  <ol class="attended-events row">
+    <%= render partial: 'events/event', collection: @upcoming_events %>
+  </ol>
+  <%= will_paginate @upcoming_events, 
+      renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+<% end %>
