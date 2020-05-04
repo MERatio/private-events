@@ -24,4 +24,10 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_redirected_to login_path
   end
+
+  test 'should redirect show when not logged in' do
+    get event_path(id: 1)
+    assert_not flash.empty?
+    assert_redirected_to login_path
+  end
 end
